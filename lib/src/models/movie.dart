@@ -12,6 +12,7 @@ import 'external-info.dart';
 import 'genre.dart';
 import 'image-collection.dart';
 import 'keyword.dart';
+import 'watch-provider.dart';
 
 class Movie extends MovieBase {
   final Collection belongsToCollection;
@@ -36,6 +37,7 @@ class Movie extends MovieBase {
   final List<Video> videos;
   final List<MovieBase> recommendations;
   final List<MovieBase> similar;
+  final Map<String,WatchProviders> watchProviders;
 
   Movie({
     int id,
@@ -71,6 +73,7 @@ class Movie extends MovieBase {
     this.videos,
     this.recommendations,
     this.similar,
+    this.watchProviders,
   }) : super(
           id: id,
           originalLanguage: originalLanguage,
@@ -150,5 +153,9 @@ class Movie extends MovieBase {
         similar: map.containsKey("similar")
             ? MovieBase.listFromJson(map["similar"]["results"], assetResolver)
             : null,
+        watchProviders : map.containsKey("watch/providers")
+            ? WatchProviders.mapFromJson(map["watch/providers"]["results"])
+            : null,
+
       );
 }

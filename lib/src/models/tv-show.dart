@@ -13,6 +13,7 @@ import 'external-info.dart';
 import 'genre.dart';
 import 'image-collection.dart';
 import 'keyword.dart';
+import 'watch-provider.dart';
 
 part 'tv-episode.dart';
 part 'tv-season.dart';
@@ -42,6 +43,7 @@ class TvShow extends TvBase {
   final List<Video> videos;
   final List<TvBase> recommendations;
   final List<TvBase> similar;
+  final Map<String,WatchProviders> watchProviders;
 
   TvShow({
     int id,
@@ -79,6 +81,7 @@ class TvShow extends TvBase {
     this.videos,
     this.recommendations,
     this.similar,
+    this.watchProviders
   }) : super(
           id: id,
           originalLanguage: originalLanguage,
@@ -153,6 +156,9 @@ class TvShow extends TvBase {
             : null,
         similar: map.containsKey("similar")
             ? TvBase.listFromJson(map["similar"]["results"], assetResolver)
+            : null,
+        watchProviders : map.containsKey("watch/providers")
+            ? WatchProviders.mapFromJson(map["watch/providers"]["results"])
             : null,
       );
 }

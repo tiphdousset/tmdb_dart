@@ -10,6 +10,7 @@ class AppendSettings {
   final bool includeRecommendations;
   final bool includeSimilarContent;
   final bool includeReviews;
+  final bool includeProviders;
 
   const AppendSettings({
     this.includeAlternativeTitles = false,
@@ -23,6 +24,7 @@ class AppendSettings {
     this.includeRecommendations = false,
     this.includeSimilarContent = false,
     this.includeReviews = false,
+    this.includeProviders = false,
   });
 
   @override
@@ -60,6 +62,9 @@ class AppendSettings {
     }
     if (includeReviews) {
       buffer.write("reviews,");
+    }
+    if (includeProviders) {
+      buffer.write("watch/providers,");
     }
 
     return buffer.toString();
